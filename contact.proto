@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package georgeben.phonebook;
+
+
+message Contact {
+  int32 id = 1;
+  string name = 2;
+  string phoneNumber = 3;
+}
+
+message createContactRequest {
+  string name = 1;
+  string phoneNumber = 2;
+}
+
+message ContactList {
+  repeated Contact contacts = 1;
+}
+
+service Phonebook {
+  rpc createContact(createContactRequest) returns (Contact);
+  rpc getContacts(google.protobuf.Empty) returns (ContactList);
+  rpc getContactStream(google.protobuf.Empty) returns (stream Contact);
+}
